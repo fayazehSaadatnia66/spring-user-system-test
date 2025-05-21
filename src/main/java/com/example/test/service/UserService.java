@@ -1,11 +1,11 @@
 package com.example.test.service;
 
-import com.example.test.entity.Person;
-import com.example.test.entity.Profile;
+import com.example.test.dto.req.CreateUser;
+import com.example.test.dto.res.ProfileResponse;
+import com.example.test.dto.res.UserResponse;
 import com.example.test.entity.User;
 import com.example.test.repo.ProfileRepo;
 import com.example.test.repo.UserRepo;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +25,35 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User saveUser(User user) {
+    public UserResponse saveUser(CreateUser createUser) {
+        User user = new User();
+        user.setName(createUser.getName());
+        user.setEmail(createUser.getEmail());
+        user.setPassword(createUser.getPassword());
+        user.setUsername(createUser.getUsername());
+        user.setFamilyName(createUser.getFamilyName());
+        user.setPhone(createUser.getPhone());
+        user.setEnabled(createUser.getEnabled());
+        User saved = userRepo.save(user);
+        UserResponse responseUser = new UserResponse();
+        responseUser.setName(saved.getName());
+        responseUser.setEmail(saved.getEmail());
+        responseUser.setPassword(saved.getPassword());
+        responseUser.setUsername(saved.getUsername());
+        responseUser.setFamilyName(saved.getFamilyName());
+        responseUser.setPhone(saved.getPhone());
+        responseUser.setEnabled(saved.getEnabled());
 
-        User dbUser = userRepo.save(user);
-        Profile profile = new Profile();
-        Profile dbProfile = profileRepo.save(profile);
-//        Profile dbProfile = profileRepo.save(user.getProfile());
+        ProfileResponse profileResponse = new ProfileResponse();
+        profileResponse.setImageUrl(saved.getProfile().getImageUrl());
+        profileResponse.setGender(saved.getProfile().getGender());
+        profileResponse.setAddress(saved.getProfile().getAddress());
+        profileResponse.setPhoneNumber(saved.getProfile().getPhoneNumber());
+        profileResponse.setDateOfBirth(saved.getProfile().getDateOfBirth());
+        responseUser.setProfile(profileResponse);
 
-//        dbUser.setProfile(dbProfile);
-        dbUser.setProfile(dbProfile);
-        return dbUser;
+        return responseUser;
+
     }
 
     public void deleteUser(Long id) {

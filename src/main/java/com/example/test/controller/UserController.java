@@ -1,5 +1,7 @@
 package com.example.test.controller;
 
+import com.example.test.dto.req.CreateUser;
+import com.example.test.dto.res.UserResponse;
 import com.example.test.entity.User;
 import com.example.test.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public UserResponse createUser(@RequestBody CreateUser createUser) {
+        return userService.saveUser(createUser);
     }
 
     @PutMapping("/{id}")

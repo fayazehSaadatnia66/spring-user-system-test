@@ -19,8 +19,7 @@ public class Profile {
     String gender;
 
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "profile")
     User user;
 
 
