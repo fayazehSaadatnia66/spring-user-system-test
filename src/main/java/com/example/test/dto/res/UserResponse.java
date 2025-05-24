@@ -1,9 +1,14 @@
 package com.example.test.dto.res;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
 public class UserResponse {
+    @Id
+    @GeneratedValue
+    Long id;
     String username;
     String password;
     String name;
@@ -13,4 +18,3 @@ public class UserResponse {
     Boolean enabled;
     ProfileResponse profile;
 }
-

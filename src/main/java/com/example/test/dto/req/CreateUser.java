@@ -11,4 +11,5 @@ public class CreateUser {
     String email;
     String phone;
     Boolean enabled;
+    CreateProfile profile;
 }

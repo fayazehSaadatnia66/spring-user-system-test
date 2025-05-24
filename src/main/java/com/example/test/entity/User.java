@@ -1,5 +1,6 @@
 package com.example.test.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class User {
 
     @OneToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")
+//    @JsonManagedReference
     Profile profile;
 
     public User(Profile profile, String username, String password, String name, String familyName, String email, String phone, Boolean enabled) {

@@ -1,5 +1,6 @@
 package com.example.test.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Profile {
 
 
     @OneToOne(mappedBy = "profile")
+    @JsonBackReference
     User user;
 
 

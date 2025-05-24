@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserResponse> getUsers() {
         return userService.getAllUsers();
     }
 
@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public UserResponse updateUser(@PathVariable Long id, @RequestBody User updateUser) {
+        return userService.updateUser(id, updateUser);
     }
 
     @DeleteMapping("/{id}")
